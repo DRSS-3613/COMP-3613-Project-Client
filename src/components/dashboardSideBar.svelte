@@ -70,7 +70,6 @@
 	</div>
 </div>
 
-
 <!-- Mobile view -->
 <div
 	style="min-height:120vh;  transform: {sideBarMove};"
