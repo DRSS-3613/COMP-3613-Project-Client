@@ -35,11 +35,11 @@ module.exports = {
 				secondary: '#13C296',
 				'body-color': '#637381',
 				warning: '#FBBF24',
-				'rural-blue': '#3056d3',
+				'rural-blue': '#189AB4',
 				'light-grey': '#f4f4f3',
 				gold: '#9c8322',
 				'homey-taupe': '#ece8d3',
-				'dark-grey': '#111827'
+				'dark-grey': '#D4F1F4'
 			}
 		}
 	},

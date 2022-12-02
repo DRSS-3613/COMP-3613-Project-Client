@@ -19,7 +19,7 @@
 	};
 </script>
 
-<div class="main">
+<div class="main transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
 	<!--card-->
 	<div
 		class="relative card bg-white flex flex-col items-center justify-center p-4 shadow-lg rounded-2xl w-64"
