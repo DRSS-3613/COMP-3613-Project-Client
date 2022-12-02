@@ -9,13 +9,13 @@
 	<div class="bg-rural-blue h-28">
 		<Nav />
 	</div>
-	<div class="flex w-full">
+	<div class="flex w-full ">
 		<div class="md:w-64">
 			<div class="sticky top-0">
 				<DashboardSideBar />
 			</div>
 		</div>
-		<div class="grid w-full justify-center items-center p-2">
+		<div class="grid w-full justify-center items-center p-2 ">
 			<div class="grid gap-6 xl:grid-cols-3 lg:grid-cols-2">
 				<div>
 					<ProfileCard />
