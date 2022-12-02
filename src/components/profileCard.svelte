@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 	let edit = 'hidden';
 	let view = '';
 
@@ -94,7 +94,7 @@
 			<div class="w-full mt-8">
 				<button
 					class="bg-blue-500 py-2 px-4 hover:bg-blue-600 text-white w-full font-semibold rounded-lg shadow-lg"
-					>View</button
+					on:click|preventDefault={() => goto('/view/' + name)}>View</button
 				>
 			</div>
 		</div>
