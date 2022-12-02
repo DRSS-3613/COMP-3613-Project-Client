@@ -42,7 +42,7 @@
       "
 >
 	<div class="container">
-		<div class="flex flex-wrap items-center -mx-4">
+		<div class="flex flex-wrap items-center justify-center -mx-4">
 			<div class="w-full px-4">
 				<div class="text-center">
 					<h1 class="font-semibold text-white text-4xl">Log In Page</h1>

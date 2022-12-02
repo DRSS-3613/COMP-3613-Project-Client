@@ -24,7 +24,7 @@
 	<link rel="icon" href="https://i.imgur.com/0CUwW1S.jpeg" />
 	<style>
 		body {
-			background-color: #111827;
+			background-color: #b7f2f8;
 		}
 	</style>
 </svelte:head>
