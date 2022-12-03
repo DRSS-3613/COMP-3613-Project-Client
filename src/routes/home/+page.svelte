@@ -11,7 +11,7 @@
 	</div>
 	<div class="flex w-full ">
 		<div class="md:w-64">
-			<div class="sticky top-0">
+			<div class="sticky top-0 border-none">
 				<DashboardSideBar />
 			</div>
 		</div>
@@ -45,7 +45,7 @@
 	<link rel="icon" href="https://i.imgur.com/0CUwW1S.jpeg" />
 	<style>
 		body {
-			background-color: #B7F2F8;
+			background-color: #b7f2f8;
 		}
 	</style>
 </svelte:head>

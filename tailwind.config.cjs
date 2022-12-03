@@ -6,26 +6,26 @@ module.exports = {
 	],
 
 	theme: {
-		// screens: {
-		// 	sm: '540px',
-		// 	// => @media (min-width: 576px) { ... }
+		screens: {
+			sm: '540px',
+			// => @media (min-width: 576px) { ... }
 
-		// 	md: '720px',
-		// 	// => @media (min-width: 768px) { ... }
+			md: '720px',
+			// => @media (min-width: 768px) { ... }
 
-		// 	lg: '960px',
-		// 	// => @media (min-width: 992px) { ... }
+			lg: '960px',
+			// => @media (min-width: 992px) { ... }
 
-		// 	xl: '1140px',
-		// 	// => @media (min-width: 1200px) { ... }
+			xl: '1140px',
+			// => @media (min-width: 1200px) { ... }
 
-		// 	'2xl': '1320px'
-		// 	// => @media (min-width: 1400px) { ... }
-		// },
-		// container: {
-		// 	center: true,
-		// 	padding: '16px'
-		// },
+			'2xl': '1320px'
+			// => @media (min-width: 1400px) { ... }
+		},
+		container: {
+			center: true,
+			padding: '16px'
+		},
 		extend: {
 			colors: {
 				black: '#212b36',
@@ -39,7 +39,7 @@ module.exports = {
 				'light-grey': '#f4f4f3',
 				gold: '#9c8322',
 				'homey-taupe': '#ece8d3',
-				'dark-grey': '#D4F1F4'
+				'dark-grey': '#B7F2F8'
 			}
 		}
 	},
