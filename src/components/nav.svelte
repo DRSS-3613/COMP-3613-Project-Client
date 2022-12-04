@@ -60,13 +60,13 @@
 			<div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
 				<div class="flex-shrink-0 flex items-center mt-10">
 					<img
-						on:click={() => goto('/')}
+						on:click={() => goto('/home')}
 						class="cursor-pointer block lg:hidden h-20 w-auto"
 						src="/logo.png"
 						alt="logo"
 					/>
 					<img
-						on:click={() => goto('/')}
+						on:click={() => goto('/home')}
 						class="hidden lg:block h-20 w-auto cursor-pointer"
 						src="/logo.png"
 						alt="logo"

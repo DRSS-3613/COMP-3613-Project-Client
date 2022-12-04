@@ -112,7 +112,7 @@
               "
 				>
 					<div class="mb-10 text-center">
-						<a href="/" class="inline-block max-w-[160px] mx-auto">
+						<a href="/home" class="inline-block max-w-[160px] mx-auto">
 							<img src="/logo.png" alt="logo" />
 						</a>
 					</div>
