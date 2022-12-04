@@ -72,6 +72,15 @@
                         text-white font-semibold text-sm rounded block text-center 
                         sm:inline-block">Rate</a
 				>
+				<div>
+					<select>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+					</select>
+				</div>
 			</div>
 
 			<!-- post, following, followers list for medium screens -->
