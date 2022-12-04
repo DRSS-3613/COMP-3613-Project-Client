@@ -64,8 +64,8 @@
 
 <!-- Desktop view -->
 <div
-	style="min-height: 88vh"
-	class="w-64 absolute md:relative bg-dark-grey shadow md:h-full flex-col justify-between hidden md:flex"
+	style="min-height: 88.75vh"
+	class="w-64 absolute md:relative md:h-full flex-col justify-between hidden md:flex"
 >
 	<div class="px-8">
 		<div class="mt-8 text-center">

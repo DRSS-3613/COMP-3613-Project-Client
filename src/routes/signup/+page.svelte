@@ -34,8 +34,9 @@
         md:pt-[130px]
         lg:pt-[160px]
         pb-[100px]
-        bg-primary
+        bg-rural-blue
         overflow-hidden
+		shadow-xl
       "
 >
 	<div class="container">
