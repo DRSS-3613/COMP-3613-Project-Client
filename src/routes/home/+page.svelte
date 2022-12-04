@@ -6,7 +6,7 @@
 </script>
 
 <div>
-	<div class="bg-rural-blue h-28 shadow-xl">
+	<div class="bg-rural-blue h-28 shadow-xl hover:bg-cyan-600 active:bg-cyan-700 focus:outline-none focus:ring focus:ring-cyan-300">
 		<Nav />
 	</div>
 	<div class="flex w-full">

@@ -93,7 +93,7 @@
 			</div>
 			<div class="w-full mt-8">
 				<button
-					class="bg-blue-500 py-2 px-4 hover:bg-blue-600 text-white w-full font-semibold rounded-lg shadow-lg"
+					class="bg-cyan-500 py-2 px-4 hover:bg-cyan-600 text-white w-full font-semibold rounded-lg shadow-lg "
 					on:click|preventDefault={() => goto('/view/' + name)}>View</button
 				>
 			</div>
