@@ -11,7 +11,7 @@
 			const rawResponse = await fetch(env.API_URL + '/api/users', {
 				method: 'POST',
 				headers: {
-					// Accept: 'application/json',
+					Accept: 'application/json',
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({ username, password })

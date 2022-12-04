@@ -62,13 +62,13 @@
 					<img
 						on:click={() => goto('/home')}
 						class="cursor-pointer block lg:hidden h-20 w-auto"
-						src="/logo.png"
+						src="/white-logo.png"
 						alt="logo"
 					/>
 					<img
 						on:click={() => goto('/home')}
 						class="hidden lg:block h-20 w-auto cursor-pointer"
-						src="/logo.png"
+						src="/white-logo.png"
 						alt="logo"
 					/>
 				</div>

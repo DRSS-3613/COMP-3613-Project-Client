@@ -1,11 +1,51 @@
 <script>
+	import { goto } from '$app/navigation';
 	/** @type {import('./$types').PageData} */
 	export let data;
-	let stateRating = false;
 	console.log(data.id);
 
-	const rankingOptions = [1, 2, 3, 4, 5];
+	let currentProfile = {
+		id: '1',
+		name: 'Daniel Yatai',
+		numPosts: 2,
+		numRatings: 3,
+		currentRating: 4,
+		seen: false
+	};
+
+	let rankingOptions = [
+		{
+			id: 1,
+			color: 'text-gray-300'
+		},
+		{
+			id: 2,
+			color: 'text-gray-300'
+		},
+		{
+			id: 3,
+			color: 'text-gray-300'
+		},
+		{
+			id: 4,
+			color: 'text-gray-300'
+		},
+		{
+			id: 5,
+			color: 'text-gray-300'
+		}
+	];
 	const rank = (n) => {
+		//change all the colors to yellow before the selected one
+		let newList = rankingOptions;
+		newList.forEach((option, index) => {
+			if (index < n) {
+				option.color = 'text-yellow-400';
+			} else {
+				option.color = 'text-gray-300';
+			}
+		});
+		rankingOptions = newList;
 		console.log(n);
 	};
 
@@ -59,7 +99,7 @@
 		<!-- profile meta -->
 		<div class="w-8/12 md:w-7/12 ml-4">
 			<div class="md:flex md:flex-wrap md:items-center mb-4">
-				<h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">mrtravlerrr_</h2>
+				<h2 class="text-3xl inline-block font-light md:mr-2 mb-2 sm:mb-0">{currentProfile.name}</h2>
 
 				<!-- badge -->
 				<span
@@ -71,53 +111,67 @@
                                ml-1 mt-px"
 					/>
 				</span>
-
-				<!-- rate button -->
-				<button
-					class="bg-blue-500 px-2 py-1 
-                        text-white font-semibold text-sm rounded block text-center 
-                        sm:inline-block"
-					on:click|preventDefault={() => (stateRating = true)}>Rate</button
-				>
-				<!-- {#if stateRating} -->
-				<!-- content here -->
-				<div>
-					<span class="star-rating">
-						{#each rankingOptions as option}
-							<input on:input={rank(option)} type="radio" name="rating" value={option} /><i />
-						{/each}
-					</span>
+				<div class="flex items-center">
+					<p class="text-yellow-400 text-xl">Rate:</p>
+					{#each rankingOptions as option}
+						<svg
+							on:click={() => rank(option.id)}
+							aria-hidden="true"
+							class="w-8 h-8 {option.color} hover:cursor-pointer"
+							fill="currentColor"
+							viewBox="0 0 20 20"
+							xmlns="http://www.w3.org/2000/svg"
+							><title>star</title><path
+								d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+							/></svg
+						>
+					{/each}
 				</div>
-				<!-- {/if} -->
+				<div>
+					<button
+						class="bg-cyan-500 p-2 hover:bg-cyan-600 text-white font-semibold rounded-lg shadow-lg "
+						on:click|preventDefault={() => goto('create/rank/' + name)}>Rank</button
+					>
+				</div>
 			</div>
 
 			<!-- post, following, followers list for medium screens -->
 			<ul class="hidden md:flex space-x-8 mb-4">
 				<li>
-					<span class="font-semibold">2</span>
-					posts
+					<span class="font-semibold">{currentProfile.numPosts}</span>
+					Posts
 				</li>
 
 				<li>
-					<span class="font-semibold">10</span>
+					<span class="font-semibold">{currentProfile.numRatings}</span>
 					Rates
 				</li>
 				<li>
-					<span class="font-semibold">3</span>
-					Rating
+					<span class="font-semibold">{currentProfile.currentRating}</span>
+					<svg
+						aria-hidden="true"
+						class="w-6 h-6 text-yellow-400 inline"
+						fill="currentColor"
+						viewBox="0 0 20 20"
+						xmlns="http://www.w3.org/2000/svg"
+						><title>star</title><path
+							d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+						/></svg
+					>
+					Avg Rating
 				</li>
 			</ul>
 
 			<!-- user meta form medium screens -->
-			<div class="hidden md:block">
+			<!-- <div class="hidden md:block">
 				<p>Lorem ipsum dolor sit amet consectetur</p>
-			</div>
+			</div> -->
 		</div>
 
 		<!-- user meta form small screens -->
-		<div class="md:hidden text-sm my-2">
+		<!-- <div class="md:hidden text-sm my-2">
 			<p>Lorem ipsum dolor sit amet consectetur</p>
-		</div>
+		</div> -->
 	</header>
 
 	<!-- posts -->
@@ -128,27 +182,25 @@
                 text-center p-2 text-gray-600 leading-snug text-sm"
 		>
 			<li>
-				<span class="font-semibold text-gray-800 block">136</span>
-				posts
+				<span class="font-semibold text-gray-800 block">{currentProfile.numPosts}</span>
+				Posts
 			</li>
 
 			<li>
-				<span class="font-semibold text-gray-800 block">40.5k</span>
+				<span class="font-semibold text-gray-800 block">{currentProfile.numRatings}</span>
 				Rates
 			</li>
 			<li>
-				<span class="font-semibold text-gray-800 block">302</span>
+				<span class="font-semibold text-gray-800 block">{currentProfile.currentRating}</span>
 				Rating
 			</li>
 		</ul>
 		<!-- flexbox grid -->
 		<div class="flex flex-wrap -mx-px md:-mx-3">
 			{#each posts as post}
-				<!-- content here -->
-				<!-- column -->
 				<div class="w-1/3 p-px md:px-3">
 					<!-- post 1-->
-					<a href="#">
+					<div>
 						<article class="post bg-gray-100 text-white relative pb-full md:mb-6">
 							<!-- post image-->
 							<img
@@ -205,7 +257,7 @@
 								</div>
 							</div>
 						</article>
-					</a>
+					</div>
 				</div>
 			{/each}
 		</div>
@@ -231,65 +283,5 @@
 		.post:hover .overlay {
 			display: block;
 		}
-	}
-
-	.star-rating {
-		font-size: 0;
-		white-space: nowrap;
-		display: inline-block;
-		width: 250px;
-		height: 50px;
-		overflow: hidden;
-		position: relative;
-		background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjREREREREIiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
-		background-size: contain;
-	}
-	.star-rating i {
-		opacity: 0;
-		position: absolute;
-		left: 0;
-		top: 0;
-		height: 100%;
-		width: 20%;
-		z-index: 1;
-		background: url('data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iMjBweCIgaGVpZ2h0PSIyMHB4IiB2aWV3Qm94PSIwIDAgMjAgMjAiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDIwIDIwIiB4bWw6c3BhY2U9InByZXNlcnZlIj48cG9seWdvbiBmaWxsPSIjRkZERjg4IiBwb2ludHM9IjEwLDAgMTMuMDksNi41ODMgMjAsNy42MzkgMTUsMTIuNzY0IDE2LjE4LDIwIDEwLDE2LjU4MyAzLjgyLDIwIDUsMTIuNzY0IDAsNy42MzkgNi45MSw2LjU4MyAiLz48L3N2Zz4=');
-		background-size: contain;
-	}
-	.star-rating input {
-		-moz-appearance: none;
-		-webkit-appearance: none;
-		opacity: 0;
-		display: inline-block;
-		width: 20%;
-		height: 100%;
-		margin: 0;
-		padding: 0;
-		z-index: 2;
-		position: relative;
-	}
-	.star-rating input:hover + i,
-	.star-rating input:checked + i {
-		opacity: 1;
-	}
-	.star-rating i ~ i {
-		width: 40%;
-	}
-	.star-rating i ~ i ~ i {
-		width: 60%;
-	}
-	.star-rating i ~ i ~ i ~ i {
-		width: 80%;
-	}
-	.star-rating i ~ i ~ i ~ i ~ i {
-		width: 100%;
-	}
-	::after,
-	::before {
-		height: 100%;
-		padding: 0;
-		margin: 0;
-		box-sizing: border-box;
-		text-align: center;
-		vertical-align: middle;
 	}
 </style>
