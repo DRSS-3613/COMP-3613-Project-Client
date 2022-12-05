@@ -6,6 +6,8 @@ const currentUser = writable({
 	loggedIn: false,
 	avatar: '',
 	images: [],
-	ranking: ''
+	ratings: [],
+	averageRating: 0,
+	feed: {}
 });
 export default currentUser;

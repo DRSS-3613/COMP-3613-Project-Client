@@ -1,12 +1,29 @@
 <script>
+	import currentUser from '$lib/stores/user.js';
 	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte/internal';
+
 	let edit = 'hidden';
 	let view = '';
 
-	let name = 'Daniel Yatali';
-	let rating = 4.3;
-	let numPosts = 3;
-	let numReviews = 2;
+	export let name = '';
+	export let rating = 0;
+	export let numPosts;
+	export let numRatings = 0;
+	export let image = '';
+
+	onMount(() => {
+		let profiles = $currentUser.feed;
+		if (profiles) {
+			let profile = profiles[$currentUser.username];
+			if (profile) {
+				name = profile.username;
+				rating = profile.averageRating;
+				numPosts = profile.images.length;
+				numReviews = profile.ratings;
+			}
+		}
+	});
 
 	const viewHandler = () => {
 		editHandler();
@@ -19,7 +36,9 @@
 	};
 </script>
 
-<div class="main transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
+<div
+	class="main transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300"
+>
 	<!--card-->
 	<div
 		class="relative card bg-white flex flex-col items-center justify-center p-4 shadow-lg rounded-2xl w-64"
@@ -54,20 +73,7 @@
 		</div>
 
 		<div class="image rounded-full p-2 shadow-2xl">
-			<div class="profile mx-auto rounded-full w-24 text-blue-600">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-24 w-24"
-					viewBox="0 0 20 20"
-					fill="currentColor"
-				>
-					<path
-						fill-rule="evenodd"
-						d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-						clip-rule="evenodd"
-					/>
-				</svg>
-			</div>
+			<img src={image} alt="" class="w-24 h-24 m-auto rounded-full object-cover lg:w-28 lg:h-28" />
 		</div>
 		<!-- Start View -->
 		<div class="{view} text-center">
@@ -88,7 +94,7 @@
 					>
 					<p class="ml-2 text-sm font-bold text-gray-900">{rating}</p>
 					<span class="w-1 h-1 mx-1.5 bg-gray-500 rounded-full" />
-					<span class="text-sm font-medium text-gray-900">{numReviews} reviews</span>
+					<span class="text-sm font-medium text-gray-900">{numRatings} reviews</span>
 				</div>
 			</div>
 			<div class="w-full mt-8">

@@ -22,12 +22,12 @@
 </script>
 
 <div class="mt-8 text-center">
-		<img
-		src="/user.png"
+	<img
+		src={$currentUser.avatar}
 		alt=""
 		class="w-32 h-32 m-auto rounded-full object-cover lg:w-28 lg:h-28"
 	/>
-<!-- <img
+	<!-- <img
 		src={user.photo}
 		alt=""
 		class="border-4 border-yellow-500 w-24 h-24 m-auto rounded-full object-cover lg:w-28 lg:h-28"
@@ -39,7 +39,7 @@
 			{userInfo.lastName}
 		</h5>
 	{/if} -->
-    		<h5 class="mt-4 text-xl font-semibold text-white lg:block">
-			{$currentUser.username}
-		</h5>
+	<h5 class="mt-4 text-xl font-semibold text-white lg:block">
+		{$currentUser.username}
+	</h5>
 </div>
