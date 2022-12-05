@@ -1,6 +1,35 @@
 <script>
 	import Nav from '../../components/nav.svelte';
 	import DashboardSideBar from '../../components/dashboardSideBar.svelte';
+	import currentUser from '$lib/stores/user';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte/internal';
+	import { env } from '$lib/env.js';
+
+	onMount(async () => {
+		if (!$currentUser.loggedIn) {
+			goto('/signin');
+			return;
+		} else {
+			try {
+				const rawResponse = await fetch(env.API_URL + '/api/users/' + $currentUser.id, {
+					method: 'GET',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						Authorization: 'JWT ' + $currentUser.access_token
+					}
+				});
+				const response = await rawResponse.json();
+				if (rawResponse.status === 200) {
+					$currentUser.images = response.images;
+					console.log('user', $currentUser);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	});
 </script>
 
 <div>

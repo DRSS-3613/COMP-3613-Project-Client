@@ -1,36 +1,41 @@
 <script>
-	const posts = [
-		{
-			image:
-				'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-			ratings: 4,
-			rating: 7
-		},
-		{
-			image:
-				'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-			ratings: 4,
-			rating: 7
-		},
-		{
-			image:
-				'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-			ratings: 4,
-			rating: 7
-		},
-		{
-			image:
-				'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-			ratings: 4,
-			rating: 7
-		},
-		{
-			image:
-				'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
-			ratings: 4,
-			rating: 7
-		}
-	];
+	import currentUser from '$lib/stores/user';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte/internal';
+	import { env } from '$lib/env.js';
+
+	// const posts = [
+	// 	{
+	// 		image:
+	// 			'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+	// 		ratings: 4,
+	// 		rating: 7
+	// 	},
+	// 	{
+	// 		image:
+	// 			'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+	// 		ratings: 4,
+	// 		rating: 7
+	// 	},
+	// 	{
+	// 		image:
+	// 			'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+	// 		ratings: 4,
+	// 		rating: 7
+	// 	},
+	// 	{
+	// 		image:
+	// 			'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+	// 		ratings: 4,
+	// 		rating: 7
+	// 	},
+	// 	{
+	// 		image:
+	// 			'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60',
+	// 		ratings: 4,
+	// 		rating: 7
+	// 	}
+	// ];
 </script>
 
 <!-- <main class="w-full bg-gray-100 bg-opacity-25 flex items-center justify-center"> -->
@@ -87,16 +92,6 @@
 					Rating
 				</li>
 			</ul>
-
-			<!-- user meta form medium screens -->
-			<div class="hidden md:block">
-				<p>Lorem ipsum dolor sit amet consectetur</p>
-			</div>
-		</div>
-
-		<!-- user meta form small screens -->
-		<div class="md:hidden text-sm my-2">
-			<p>Lorem ipsum dolor sit amet consectetur</p>
 		</div>
 	</header>
 
@@ -123,7 +118,7 @@
 		</ul>
 		<!-- flexbox grid -->
 		<div class="flex flex-wrap -mx-px md:-mx-3">
-			{#each posts as post}
+			{#each $currentUser.images as post}
 				<!-- content here -->
 				<!-- column -->
 				<div class="w-1/3 p-px md:px-3">
@@ -133,7 +128,7 @@
 							<!-- post image-->
 							<img
 								class="w-full h-full absolute left-0 top-0 object-cover"
-								src={post.image}
+								src={post.url}
 								alt="post"
 							/>
 
@@ -162,7 +157,7 @@
 												d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"
 											/>
 										</svg>
-										{post.rating}
+										{post.rank}
 									</span>
 
 									<span class="p-2 inline-flex">
@@ -180,7 +175,7 @@
 												d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
 											/>
 										</svg>
-										{post.ratings}
+										{post.num_rankings}
 									</span>
 								</div>
 							</div>

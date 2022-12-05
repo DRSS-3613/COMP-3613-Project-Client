@@ -1,6 +1,7 @@
 <script>
 	import { env } from '$lib/env.js';
 	import ProfileCard from '../../components/profileCard.svelte';
+	import { goto } from '$app/navigation';
 </script>
 
 <div class="grid w-full justify-center items-center p-2">

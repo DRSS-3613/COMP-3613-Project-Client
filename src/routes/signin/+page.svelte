@@ -2,8 +2,10 @@
 	import { env } from '$lib/env.js';
 	import { goto } from '$app/navigation';
 	import currentUser from '$lib/stores/user.js';
+	import { onMount } from 'svelte/internal';
 	let username = '';
 	let password = '';
+	let error = '';
 
 	const signin = async () => {
 		try {
@@ -21,11 +23,39 @@
 				localStorage.setItem('access_token', access_token);
 				currentUser.set({ username, access_token });
 				goto('/home');
+			} else {
+				error = 'Invalid username or password';
 			}
 		} catch (error) {
 			console.error(error);
 		}
 	};
+
+	onMount(async () => {
+		if (localStorage.getItem('access_token')) {
+			try {
+				const Response = await fetch(env.API_URL + '/identify', {
+					method: 'GET',
+					headers: {
+						Accept: 'application/json',
+						Authorization: 'JWT ' + localStorage.getItem('access_token'),
+						'Content-Type': 'application/json'
+					}
+				});
+				let user = await Response.json();
+				if (Response.status == 200) {
+					$currentUser.id = user.id;
+					$currentUser.username = user.username;
+					$currentUser.access_token = localStorage.getItem('access_token');
+					$currentUser.loggedIn = true;
+					console.log($currentUser);
+					goto('/home');
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		}
+	});
 </script>
 
 <!-- ====== Banner Section Start -->
@@ -179,6 +209,10 @@
                     "
 							/>
 						</div>
+						<!-- error  -->
+						{#if error}
+							<div class="text-red-500 text-sm">{error}</div>
+						{/if}
 					</form>
 
 					<p class="text-base text-[#adadad]">

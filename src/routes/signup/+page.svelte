@@ -4,6 +4,7 @@
 
 	let username = '';
 	let password = '';
+	let error = '';
 
 	const signup = async () => {
 		console.log('signup' + username + password);
@@ -18,7 +19,11 @@
 			});
 			const response = await rawResponse.json();
 			console.log(response);
-			goto('/signin');
+			if (rawResponse.status == 201) {
+				goto('/signin');
+			} else {
+				error = response.message;
+			}
 		} catch (error) {
 			console.error(error);
 		}
@@ -175,6 +180,10 @@
                       hover:shadow-md"
 							/>
 						</div>
+						<!-- error -->
+						{#if error}
+							<div class="text-red-500 text-sm">{error}</div>
+						{/if}
 					</form>
 
 					<p class="text-base text-[#adadad]">
