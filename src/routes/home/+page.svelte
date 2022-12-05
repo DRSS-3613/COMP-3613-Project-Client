@@ -98,8 +98,8 @@
 			All Profiles viewed, check back later!
 		{:else}
 			<div class="grid gap-9 xl:grid-cols-3 lg:grid-cols-2">
-				{#each Object.entries($currentUser.feed) as [title, profile]}
-					{#if Object.entries.length === 1}
+				{#if Object.entries($currentUser.feed).length === 1}
+					{#each Object.entries($currentUser.feed) as [title, profile]}
 						<div class="xl:col-span-3 lg:col-span-2">
 							<ProfileCard
 								numPosts={profile.images.length}
@@ -109,17 +109,20 @@
 								image={profile.avatar}
 							/>
 						</div>
-					{:else}
+					{/each}
+				{:else}
+					{#each Object.entries($currentUser.feed) as [title, profile]}
 						<div>
 							<ProfileCard
 								numPosts={profile.images.length}
 								name={profile.username}
 								rating={profile.averageRating}
-								numRatings={profile.ratings.length}
+								numRatings={profile.ratings}
+								image={profile.avatar}
 							/>
 						</div>
-					{/if}
-				{/each}
+					{/each}
+				{/if}
 			</div>
 		{/if}
 	{/if}
