@@ -1,3 +1,3 @@
 export const env = {
-	API_URL: 'http://localhost:8080'
+	API_URL: 'https://drss-3613.herokuapp.com'
 };
