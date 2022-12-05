@@ -1,6 +1,6 @@
 # COMP-3613-Project-Client
 
-Production: https://comp-3613-project-client.vercel.app/home
+Production: https://comp-3613-project-client.vercel.app
 
 ![image](https://user-images.githubusercontent.com/70588497/205751834-818ba685-673f-4445-8886-23e877b1454d.png)
 
