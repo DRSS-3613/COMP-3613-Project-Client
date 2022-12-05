@@ -4,7 +4,7 @@
 </script>
 
 <div>
-	<div class="bg-rural-blue h-28">
+	<div class="bg-rural-blue h-28 hover:bg-cyan-700 text-white w-full font-semibold shadow-lg ">
 		<Nav />
 	</div>
 	<div class="flex w-full">
