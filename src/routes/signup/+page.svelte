@@ -7,7 +7,7 @@
 	let error = '';
 
 	const signup = async () => {
-		console.log('signup' + username + password);
+		console.log('signup' + username);
 		try {
 			const rawResponse = await fetch(env.API_URL + '/api/users', {
 				method: 'POST',
@@ -19,10 +19,10 @@
 			});
 			const response = await rawResponse.json();
 			console.log(response);
-			if (rawResponse.status == 201) {
-				goto('/signin');
-			} else {
+			if (rawResponse.status == 400) {
 				error = response.message;
+			} else {
+				goto('/signin');
 			}
 		} catch (error) {
 			console.error(error);

@@ -25,7 +25,7 @@
 				const response = await rawResponse.json();
 				if (rawResponse.status === 200) {
 					$currentUser.avatar = response.avatar;
-					$currentUser.images = response.images;
+					$currentUser.images = response.images.sort((a, b) => a.rank - b.rank);
 					$currentUser.averageRating = response.average_rating ? response.average_rating : 0;
 					$currentUser.ratings = response.ratings;
 					console.log('response', response);
