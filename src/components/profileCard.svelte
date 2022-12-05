@@ -24,16 +24,6 @@
 			}
 		}
 	});
-
-	const viewHandler = () => {
-		editHandler();
-		name = updateName;
-		studentID = updateStudentID;
-		degree = updateDegree;
-
-		//Todo
-		//Take data and make put request to update student
-	};
 </script>
 
 <div
@@ -76,7 +66,7 @@
 			<img src={image} alt="" class="w-24 h-24 m-auto rounded-full object-cover lg:w-28 lg:h-28" />
 		</div>
 		<!-- Start View -->
-		<div class="{view} text-center">
+		<div class=" text-center">
 			<div class="text-gray-800 text-2xl font-medium mt-4">
 				<p>{name}</p>
 			</div>

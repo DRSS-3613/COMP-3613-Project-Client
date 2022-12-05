@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import currentUser from '$lib/stores/user.js';
 	import { onMount } from 'svelte/internal';
+	import { env } from '$lib/env.js';
 	/** @type {import('./$types').PageData} */
 	export let data;
 
@@ -55,7 +56,7 @@
 			color: 'text-gray-300'
 		}
 	];
-	const rank = (n) => {
+	const rank = async (n) => {
 		//change all the colors to yellow before the selected one
 		let newList = rankingOptions;
 		newList.forEach((option, index) => {
@@ -66,7 +67,24 @@
 			}
 		});
 		rankingOptions = newList;
-		console.log(n);
+		try {
+			let response = await fetch(env.API_URL + '/api/ratings', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `JWT ${$currentUser.access_token}`
+				},
+				body: JSON.stringify({
+					rating: n,
+					rated_id: profile.id,
+					rater_id: $currentUser.id
+				})
+			});
+			let result = await response.json();
+			console.log(result);
+		} catch (e) {
+			console.log(e);
+		}
 	};
 
 	const posts = [
@@ -150,7 +168,7 @@
 				<div>
 					<button
 						class="bg-cyan-500 p-2 hover:bg-cyan-600 text-white font-semibold rounded-lg shadow-lg "
-						on:click|preventDefault={() => goto('create/rank/' + data.id)}>Rank</button
+						on:click|preventDefault={() => goto('/create/rank/' + data.id)}>Rank</button
 					>
 				</div>
 			</div>

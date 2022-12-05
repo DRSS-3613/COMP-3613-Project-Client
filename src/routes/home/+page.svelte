@@ -50,6 +50,9 @@
 				if (rawResponse.status === 200) {
 					console.log('Feed response', response);
 					for (let profile of response) {
+						if (profile.seen) {
+							continue;
+						}
 						try {
 							const rawResponse = await fetch(
 								env.API_URL + '/api/users/' + profile.sender_id + '/summary',

@@ -1,14 +1,20 @@
 <script>
+	import { env } from '$lib/env.js';
+	import { goto } from '$app/navigation';
+
+	import { onMount } from 'svelte/internal';
+
+	import currentUser from '$lib/stores/user';
 	let avatar, fileinput;
 	const onFileSelected = (e) => {
 		let image = e.target.files[0];
 		uploadImage(image);
-		let reader = new FileReader();
-		reader.readAsDataURL(image);
-		reader.onload = (e) => {
-			console.log(e.target.result);
-			avatar = e.target.result;
-		};
+		// let reader = new FileReader();
+		// reader.readAsDataURL(image);
+		// reader.onload = (e) => {
+		// 	console.log(e.target.result);
+		// 	avatar = e.target.result;
+		// };
 	};
 	//submit image to imgbb
 	const uploadImage = async (image) => {
@@ -21,6 +27,29 @@
 		const data = await res.json();
 		console.log(data.data.url);
 		avatar = data.data.url;
+	};
+
+	const createPost = async () => {
+		try {
+			let response = await fetch(env.API_URL + '/api/image', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `JWT ${$currentUser.access_token}`
+				},
+				body: JSON.stringify({
+					url: avatar
+				})
+			});
+			let result = await response.json();
+			console.log(result);
+			if (response.status === 201) {
+				$currentUser.images.push(result);
+				goto('/view/my-profile');
+			}
+		} catch (e) {
+			console.log(e);
+		}
 	};
 </script>
 
@@ -80,7 +109,7 @@
 		<div class="">
 			<button
 				class="bg-blue-500 p-6 hover:bg-blue-600 text-white w-full font-semibold rounded-lg shadow-lg"
-				on:click|preventDefault={() => console.log('click')}>Post</button
+				on:click|preventDefault={createPost}>Post</button
 			>
 		</div>
 	{/if}
